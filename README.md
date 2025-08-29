@@ -42,8 +42,23 @@ RelayHub is a cross-platform tool to relay **text** and **files** between device
 ---
 
 ## Building (Temporary)
+
 ```bash
 cd core
 cargo build
 cargo test
 ```
+
+> Requires Rust (stable). CI runs on Linux/macOS/Windows.
+
+---
+
+## Contributing
+
+See CONTRIBUTING.md.
+
+---
+
+## Security
+
+Do not open issues for sensitive security reports. Email [ninja.notleft@proton.me](mailto:ninja.notleft@proton.me) or use your preferred PGP method.
