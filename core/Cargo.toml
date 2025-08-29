@@ -1,0 +1,26 @@
+[package]
+name = "relayhub-core"
+version = "0.0.1"
+edition = "2025"
+license = "GPL-3.0-or-later"
+authors = ["RelayHub Contributors"]
+description = "Core library for RelayHub: a cross-device text/file relay."
+repository = "https://github.com/ninja-left/relay-hub"
+keywords = ["relay", "lan", "file-transfer", "rust"]
+categories = ["network-programming"]
+
+[lib]
+name = "relayhub_core"
+path = "src/lib.rs"
+crate-type = ["rlib"]
+
+[features]
+# Planned toggles
+# tls = []
+# discovery = []
+
+[dependencies]
+# (intentionally empty for now)
+
+[dev-dependencies]
+# none
