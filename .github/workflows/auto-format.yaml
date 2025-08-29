@@ -1,10 +1,10 @@
 name: Auto Format
 
 on:
-  pull_request:
-    branches: ["*"]
   push:
-    branches: ["*"]
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
 
 jobs:
   fmt:
@@ -22,8 +22,8 @@ jobs:
           toolchain: stable
 
       - name: Run cargo fmt
+        working-directory: core
         run: cargo fmt --all
-        working-directory: /core
 
       - name: Commit changes
         run: |
