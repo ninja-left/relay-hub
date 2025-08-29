@@ -23,6 +23,7 @@ jobs:
 
       - name: Run cargo fmt
         run: cargo fmt --all
+        working-directory: /relay-hub/core/
 
       - name: Commit changes
         run: |
