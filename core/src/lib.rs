@@ -3,6 +3,8 @@
 //! This crate exposes a minimal API surface for Phase 1 so CI can build & test.
 //! Future steps will implement actual networking, TLS, discovery, and transfers.
 //!
+#![allow(unused_imports)]
+#![allow(clippy::new_without_default)]
 
 pub mod connection;
 pub mod transfer;
