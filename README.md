@@ -2,7 +2,7 @@
 
 *painless cross-device text & file relay over local networks*
 
-[![Rust CI](https://img.shields.io/github/actions/workflow/status/ninja-left/relay-hub/rust-ci.yml?branch=main)](https://github.com/ninja-left/relay-hub/actions)
+[![Rust CI](https://img.shields.io/github/actions/workflow/status/ninja-left/relay-hub/rust-ci.yaml?branch=main)](https://github.com/ninja-left/relay-hub/actions)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Latest Release](https://img.shields.io/github/v/release/ninja-left/relay-hub?display_name=tag)](https://github.com/ninja-left/relay-hub/releases)
 
