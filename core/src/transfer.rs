@@ -11,7 +11,9 @@ use crate::{RhError, RhResult};
 pub struct TransferManager;
 
 impl TransferManager {
-    pub fn new() -> Self { Self }
+    pub fn new() -> Self {
+        Self
+    }
 
     /// Send a UTF-8 text message to the connected peer
     pub fn send_text(&self, _message: &str) -> RhResult<()> {
@@ -31,7 +33,10 @@ mod tests {
     #[test]
     fn transfer_manager_instantiates() {
         let tm = TransferManager::new();
-        assert!(matches!(tm.send_text("hello"), Err(RhError::Unimplemented(_))));
+        assert!(matches!(
+            tm.send_text("hello"),
+            Err(RhError::Unimplemented(_))
+        ));
         assert!(matches!(tm.receive_text(), Err(RhError::Unimplemented(_))));
     }
 }

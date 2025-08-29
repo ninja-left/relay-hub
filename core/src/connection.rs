@@ -13,7 +13,9 @@ use crate::{RhError, RhResult};
 pub struct ConnectionManager;
 
 impl ConnectionManager {
-    pub fn new() -> Self { Self }
+    pub fn new() -> Self {
+        Self
+    }
 
     /// Connect to a peer by IP/port (planned TCP/TLS)
     pub fn connect(&self, _ip: &str, _port: u16) -> RhResult<()> {
@@ -34,7 +36,13 @@ mod tests {
     fn connection_manager_instantiates() {
         let cm = ConnectionManager::new();
         // For now just ensure methods return the stub error
-        assert!(matches!(cm.connect("127.0.0.1", 9000), Err(RhError::Unimplemented(_))));
-        assert!(matches!(cm.listen("0.0.0.0", 9000), Err(RhError::Unimplemented(_))));
+        assert!(matches!(
+            cm.connect("127.0.0.1", 9000),
+            Err(RhError::Unimplemented(_))
+        ));
+        assert!(matches!(
+            cm.listen("0.0.0.0", 9000),
+            Err(RhError::Unimplemented(_))
+        ));
     }
 }
