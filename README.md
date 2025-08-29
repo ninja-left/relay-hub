@@ -55,7 +55,7 @@ cargo test
 
 ## Contributing
 
-See CONTRIBUTING.md.
+See [CONTRIBUTING.md].
 
 ---
 
