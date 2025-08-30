@@ -8,7 +8,7 @@ on:
     branches:
       - main
     paths:
-      - 'code/'
+      - 'core/'
       - '.github/workflows/rust-ci.yaml'
 
 jobs:
