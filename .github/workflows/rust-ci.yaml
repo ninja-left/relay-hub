@@ -5,7 +5,11 @@ permissions:
 
 on:
   pull_request:
-    branches: ["main"]
+    branches:
+      - main
+    paths:
+      - 'code/'
+      - '.github/workflows/rust-ci.yaml'
 
 jobs:
   code-format:
