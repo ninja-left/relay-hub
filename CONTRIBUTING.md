@@ -3,7 +3,8 @@
 Thanks for your interest in contributing! This document outlines how to propose changes and collaborate effectively.
 
 ## Code of Conduct
-Be respectful, helpful, and constructive. No harassment or discrimination. Maintainers may moderate.
+
+Read [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md)
 
 ## Development Model
 RelayHub is split into:
