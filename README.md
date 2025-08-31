@@ -61,6 +61,7 @@ See [CONTRIBUTING.md].
 
 ## Security
 
-Do not open issues for sensitive security reports. Email [ninja.notleft@proton.me](mailto:ninja.notleft@proton.me) or use your preferred PGP method.
+See [SECURITY.md]
 
 [CONTRIBUTING.md]: ./CONTRIBUTING.md
+[SECURITY.md]: ./SECURITY.md
