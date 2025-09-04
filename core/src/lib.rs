@@ -9,6 +9,9 @@
 pub mod connection;
 pub mod transfer;
 
+pub use connection::ConnectionManager;
+pub use transfer::TransferManager;
+
 /// Common result type for RelayHub core.
 pub type RhResult<T> = Result<T, RhError>;
 
