@@ -26,6 +26,38 @@ impl ConnectionManager {
     pub fn listen(&self, _addr: &str, _port: u16) -> RhResult<()> {
         Err(RhError::Unimplemented("listen"))
     }
+
+    /// Start a simple TCP server that receives text messages.
+    /// Runs in a blocking loop (for now).
+    pub fn start_server(port: u16) -> std::io::Result<()> {
+        use std::io::Read;
+        use std::net::TcpListener;
+        use std::thread;
+
+        let listener = TcpListener::bind(("0.0.0.0", port))?;
+        println!("Server listening on port {}", port);
+
+        for stream in listener.incoming() {
+            match stream {
+                Ok(mut s) => {
+                    thread::spawn(move || {
+                        let mut buffer = [0; 1024];
+                        match s.read(&mut buffer) {
+                            Ok(n) if n > 0 => {
+                                let msg = String::from_utf8_lossy(&buffer[..n]);
+                                println!("Received: {}", msg);
+                            }
+                            Ok(_) => {}
+                            Err(e) => eprintln!("Read error: {}", e),
+                        }
+                    });
+                }
+                Err(e) => eprintln!("Connection failed: {}", e),
+            }
+        }
+
+        Ok(())
+    }
 }
 
 #[cfg(test)]
