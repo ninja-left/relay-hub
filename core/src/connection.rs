@@ -27,36 +27,23 @@ impl ConnectionManager {
         Err(RhError::Unimplemented("listen"))
     }
 
-    /// Start a simple TCP server that receives text messages.
-    /// Runs in a blocking loop (for now).
+     /// Start a simple TCP server that receives text messages.
+     /// Runs in a blocking loop (for now).
     pub fn start_server(port: u16) -> std::io::Result<()> {
-        use std::io::Read;
-        use std::net::TcpListener;
         use std::thread;
+        use crate::transfer::TransferManager;
 
-        let listener = TcpListener::bind(("0.0.0.0", port))?;
         println!("Server listening on port {}", port);
-
-        for stream in listener.incoming() {
-            match stream {
-                Ok(mut s) => {
-                    thread::spawn(move || {
-                        let mut buffer = [0; 1024];
-                        match s.read(&mut buffer) {
-                            Ok(n) if n > 0 => {
-                                let msg = String::from_utf8_lossy(&buffer[..n]);
-                                println!("Received: {}", msg);
-                            }
-                            Ok(_) => {}
-                            Err(e) => eprintln!("Read error: {}", e),
-                        }
-                    });
+        loop {
+            match TransferManager::receive_text(port) {
+                Ok(msg) => {
+                    println!("Received: {}", msg);
                 }
-                Err(e) => eprintln!("Connection failed: {}", e),
+                Err(e) => eprintln!("Server error: {:?}", e),
             }
+            // Prevent tight loop spin if an error occurs
+            thread::sleep(std::time::Duration::from_millis(50));
         }
-
-        Ok(())
     }
 }
 
