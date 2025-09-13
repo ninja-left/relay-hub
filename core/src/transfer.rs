@@ -55,7 +55,7 @@ mod tests {
 
         // Spawn server in a thread
         let handle = thread::spawn(move || {
-            TransferManager::receive_text(port).unwrap()
+           TransferManager::receive_text(port).unwrap()
         });
 
         // Give the server a moment to bind
