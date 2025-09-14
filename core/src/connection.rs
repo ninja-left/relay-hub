@@ -8,8 +8,8 @@
 //!
 
 use crate::{RhError, RhResult};
+use crate::transfer::TransferManager;
 
-/// Connection manager stub
 pub struct ConnectionManager;
 
 impl ConnectionManager {
@@ -17,51 +17,26 @@ impl ConnectionManager {
         Self
     }
 
-    /// Connect to a peer by IP/port (planned TCP/TLS)
-    pub fn connect(&self, _ip: &str, _port: u16) -> RhResult<()> {
-        Err(RhError::Unimplemented("connect"))
+    /// Connect to a peer and send a text message
+    pub fn connect(&self, ip: &str, port: u16, message: &str) -> RhResult<()> {
+        TransferManager::send_text(ip, port, message)
     }
 
-    /// Start listening for incoming connections on addr:port
-    pub fn listen(&self, _addr: &str, _port: u16) -> RhResult<()> {
-        Err(RhError::Unimplemented("listen"))
-    }
-
-     /// Start a simple TCP server that receives text messages.
-     /// Runs in a blocking loop (for now).
-    pub fn start_server(port: u16) -> std::io::Result<()> {
-        use std::thread;
-        use crate::transfer::TransferManager;
-
-        println!("Server listening on port {}", port);
-        loop {
-            match TransferManager::receive_text(port) {
-                Ok(msg) => {
-                    println!("Received: {}", msg);
-                }
-                Err(e) => eprintln!("Server error: {:?}", e),
-            }
-            // Prevent tight loop spin if an error occurs
-            thread::sleep(std::time::Duration::from_millis(50));
-        }
+    /// Listen for incoming connections and return the first received text
+    pub fn listen(&self, addr: &str, port: u16) -> RhResult<String> {
+        // For now we ignore addr and just bind to localhost
+        TransferManager::receive_text(port)
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use super::*;
 
     #[test]
     fn connection_manager_instantiates() {
         let cm = ConnectionManager::new();
-        // For now just ensure methods return the stub error
-        assert!(matches!(
-            cm.connect("127.0.0.1", 9000),
-            Err(RhError::Unimplemented(_))
-        ));
-        assert!(matches!(
-            cm.listen("0.0.0.0", 9000),
-            Err(RhError::Unimplemented(_))
-        ));
+
+        // Ensure object can be created
+        assert!(cm.connect("127.0.0.1", 9000, "test").is_err());
     }
 }
