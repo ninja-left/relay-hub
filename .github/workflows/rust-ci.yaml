@@ -16,16 +16,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
           ref: ${{ github.head_ref }}
 
-      - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
+      - name: Set up Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1.17.0
         with:
           toolchain: stable
+          cache: true
 
       - name: Run cargo fmt
         working-directory: core
@@ -52,23 +53,18 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install Rust (stable)
         uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt, clippy
 
-      - name: Cache Cargo registry
-        uses: actions/cache@v4
+      - name: Set up Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1.17.0
         with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            core/target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('core/Cargo.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-cargo-
+          toolchain: stable
+          cache: true
 
       - name: Format check
         working-directory: core

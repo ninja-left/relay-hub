@@ -9,20 +9,26 @@
 pub mod connection;
 pub mod transfer;
 
+pub use connection::ConnectionManager;
+pub use transfer::TransferManager;
+
 /// Common result type for RelayHub core.
 pub type RhResult<T> = Result<T, RhError>;
 
-/// Minimal error type for now.
+/// Error type for RelayHub core operations.
 #[derive(Debug)]
 pub enum RhError {
     /// Placeholder for unimplemented operations
     Unimplemented(&'static str),
+    /// An I/O operation failed.
+    Io(String),
 }
 
 impl core::fmt::Display for RhError {
     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
         match self {
-            RhError::Unimplemented(msg) => write!(f, "unimplemented: {}", msg),
+            RhError::Unimplemented(msg) => write!(f, "unimplemented: {msg}"),
+            RhError::Io(msg) => write!(f, "I/O error: {msg}"),
         }
     }
 }
@@ -35,8 +41,6 @@ mod tests {
 
     #[test]
     fn crate_compiles_and_basic_api_exists() {
-        // Call a couple of stub APIs just to ensure they link
         let _ = crate::connection::ConnectionManager::new();
-        let _ = crate::transfer::TransferManager::new();
     }
 }

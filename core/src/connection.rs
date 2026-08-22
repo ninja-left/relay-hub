@@ -7,9 +7,9 @@
 //! - LAN discovery/broadcast (later)
 //!
 
-use crate::{RhError, RhResult};
+use crate::transfer::TransferManager;
+use crate::RhResult;
 
-/// Connection manager stub
 pub struct ConnectionManager;
 
 impl ConnectionManager {
@@ -17,32 +17,27 @@ impl ConnectionManager {
         Self
     }
 
-    /// Connect to a peer by IP/port (planned TCP/TLS)
-    pub fn connect(&self, _ip: &str, _port: u16) -> RhResult<()> {
-        Err(RhError::Unimplemented("connect"))
+    /// Connect to a peer and send a text message
+    pub fn connect(&self, ip: &str, port: u16, message: &str) -> RhResult<()> {
+        TransferManager::send_text(ip, port, message)
     }
 
-    /// Start listening for incoming connections on addr:port
-    pub fn listen(&self, _addr: &str, _port: u16) -> RhResult<()> {
-        Err(RhError::Unimplemented("listen"))
+    /// Listen for incoming connections and return the first received text
+    pub fn listen(&self, _addr: &str, port: u16) -> RhResult<String> {
+        // For now we ignore addr and just bind to localhost
+        TransferManager::receive_text(port)
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use super::ConnectionManager;
 
     #[test]
     fn connection_manager_instantiates() {
         let cm = ConnectionManager::new();
-        // For now just ensure methods return the stub error
-        assert!(matches!(
-            cm.connect("127.0.0.1", 9000),
-            Err(RhError::Unimplemented(_))
-        ));
-        assert!(matches!(
-            cm.listen("0.0.0.0", 9000),
-            Err(RhError::Unimplemented(_))
-        ));
+
+        // Ensure object can be created
+        assert!(cm.connect("127.0.0.1", 9000, "test").is_err());
     }
 }

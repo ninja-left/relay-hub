@@ -2,7 +2,7 @@ name: 🐞 Bug Report
 description: File a bug/issue in a prettier format
 title: "[BUG] <title>"
 labels: ["Bug"]
-assignees: ["ninja-left"]
+assignees: ["right-ward"]
 body:
 - type: checkboxes
   attributes:
