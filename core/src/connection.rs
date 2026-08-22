@@ -8,7 +8,7 @@
 //!
 
 use crate::transfer::TransferManager;
-use crate::{RhError, RhResult};
+use crate::RhResult;
 
 pub struct ConnectionManager;
 
@@ -23,7 +23,7 @@ impl ConnectionManager {
     }
 
     /// Listen for incoming connections and return the first received text
-    pub fn listen(&self, addr: &str, port: u16) -> RhResult<String> {
+    pub fn listen(&self, _addr: &str, port: u16) -> RhResult<String> {
         // For now we ignore addr and just bind to localhost
         TransferManager::receive_text(port)
     }
@@ -31,6 +31,7 @@ impl ConnectionManager {
 
 #[cfg(test)]
 mod tests {
+    use super::ConnectionManager;
 
     #[test]
     fn connection_manager_instantiates() {
