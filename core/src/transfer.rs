@@ -7,7 +7,7 @@
 //!
 
 use std::io::{Read, Write};
-use std::net::{TcpStream, TcpListener};
+use std::net::{TcpListener, TcpStream};
 
 use crate::error::{RhError, RhResult};
 
@@ -54,9 +54,7 @@ mod tests {
         let port = 45678;
 
         // Spawn server in a thread
-        let handle = thread::spawn(move || {
-           TransferManager::receive_text(port).unwrap()
-        });
+        let handle = thread::spawn(move || TransferManager::receive_text(port).unwrap());
 
         // Give the server a moment to bind
         thread::sleep(Duration::from_millis(100));

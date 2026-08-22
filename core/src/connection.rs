@@ -7,8 +7,8 @@
 //! - LAN discovery/broadcast (later)
 //!
 
-use crate::{RhError, RhResult};
 use crate::transfer::TransferManager;
+use crate::{RhError, RhResult};
 
 pub struct ConnectionManager;
 
