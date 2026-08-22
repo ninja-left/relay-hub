@@ -7,4 +7,4 @@ description = "CLI testing tool for RelayHub core library"
 repository = "https://github.com/right-ward/relay-hub"
 
 [dependencies]
-relayhub_core = { path = "../core" }
+relayhub-core = { path = "../core" }
