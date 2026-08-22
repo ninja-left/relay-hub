@@ -2,7 +2,7 @@ name: 🌱 Feature
 description: Suggest a feature/enhancement
 title: "[FEATURE] <title>"
 labels: ["enhancement"]
-assignees: ["ninja-left"]
+assignees: ["right-ward"]
 body:
 - type: checkboxes
   attributes:
