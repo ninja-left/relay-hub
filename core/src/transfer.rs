@@ -9,7 +9,7 @@
 use std::io::{Read, Write};
 use std::net::{TcpListener, TcpStream};
 
-use crate::error::{RhError, RhResult};
+use crate::{RhError, RhResult};
 
 pub struct TransferManager;
 
@@ -43,6 +43,7 @@ impl TransferManager {
         }
     }
 }
+
 #[cfg(test)]
 mod tests {
     use super::TransferManager;
