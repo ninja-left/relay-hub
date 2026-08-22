@@ -1,11 +1,11 @@
-use relay_core::{ConnectionManager, TransferManager};
+use relayhub_core::{ConnectionManager, TransferManager};
 use std::env;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
 
     if args.len() < 2 {
-        eprintln!("Usage: relay_cli [send|serve] ...");
+        eprintln!("Usage: relayhub_cli [send|serve] ...");
         return;
     }
 
@@ -16,7 +16,7 @@ fn main() {
         }
         "send" => {
             if args.len() < 4 {
-                eprintln!("Usage: relay_cli send <ip:port> <message>");
+                eprintln!("Usage: relayhub_cli send <ip:port> <message>");
                 return;
             }
             TransferManager::send_text(&args[2], &args[3]).unwrap();
